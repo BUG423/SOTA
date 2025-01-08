@@ -1,7 +1,11 @@
 import math
 import torch
 import torch.nn as nn
-#对比驱动特征聚合模块(CDFA):接收来自语义信息解耦模块的前景和背景特征，指导多级特征融合和关键特征增强，进一步区分待分割实体。
+""" 
+论文题目：ConDSeg: A General Medical Image Segmentation Framework via Contrast-Driven Feature Enhancement
+论文链接：https://arxiv.org/pdf/2412.08345官方github：https://github.com/Mengqi-Lei/ConDSeg
+对比驱动特征聚合模块(CDFA):接收来自语义信息解耦模块的前景和背景特征，指导多级特征融合和关键特征增强，进一步区分待分割实体。
+"""
 class CBR(nn.Module):
     def __init__(self, in_c, out_c, kernel_size=3, padding=1, dilation=1, stride=1, act=True):
         super().__init__()
