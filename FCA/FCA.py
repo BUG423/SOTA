@@ -1,6 +1,14 @@
 import math
 import torch
 from torch import nn
+""""
+论文题目：Unsupervised Bidirectional Contrastive Reconstruction and Adaptive Fine-Grained Channel Attention Networks for image dehazing
+论文链接：https://doi.org/10.1016/j.neunet.2024.106314
+官方github：https://github.com/Lose-Code/UBRFC-Net
+本文提出了一种名为UBRFC-Net的无监督图像去雾网络，通过双向对比重建和自适应细粒度通道注意力机制解决现有无监督去雾算法的局限性，显著提升了图像去雾的效果。
+
+自适应细粒度通道注意力机制（FCA）：开发了一种自适应细粒度通道注意力机制，利用相关矩阵捕捉全局和局部信息之间的相关性，促进它们之间的交互，实现更有效的特征权重分配。这增强了特征表示，并提高了网络的去雾性能。
+"""
 class Mix(nn.Module):
     def __init__(self, m=-0.80):
         super(Mix, self).__init__()
