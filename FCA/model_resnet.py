@@ -4,7 +4,7 @@ The code is based on the original ResNet implementation from torchvision.models.
 import torch.nn as nn
 import torch
 import os,sys
-from xhs.FCA.FCA import CDFAPreprocess
+from FCA import FCA
 def conv3x1(in_planes, out_planes, stride=1, groups=1, dilation=1):
     """ 1D convolution with kernel size 3 """
     return nn.Conv1d(in_planes,out_planes,kernel_size=3,stride=stride,padding=dilation,groups=groups,bias=False,dilation=dilation,)
@@ -51,8 +51,8 @@ class ResNet1D(nn.Module):
             self._make_residual_group1d(block_type, 128, group_sizes[1], stride=2),
             self._make_residual_group1d(block_type, 256, group_sizes[2], stride=2),
             self._make_residual_group1d(block_type, 512, group_sizes[3], stride=2),)
-        #CDFA
-        self.cdfa = CDFAPreprocess(512,512,1)
+        #FCA
+        self.fca = FCA(512)
         #output module
         self.avgpool = nn.AdaptiveAvgPool1d(1)
         self.fc = nn.Linear(512,2)
@@ -71,7 +71,7 @@ class ResNet1D(nn.Module):
     def forward(self, x):
         x = self.input_block(x)
         x = self.residual_groups(x)
-        x = self.cdfa(x)
+        x = self.fca(x)
         x = self.avgpool(x)
         x = self.fc(x.view(x.size(0),-1))
         return x

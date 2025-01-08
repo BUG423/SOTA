@@ -15,31 +15,29 @@ class Mix(nn.Module):
 class FCA(nn.Module):
     def __init__(self,channel,b=1, gamma=2):
         super(FCA, self).__init__()
-        self.avg_pool = nn.AdaptiveAvgPool2d(1)#全局平均池化
-        #一维卷积
+        self.avg_pool = nn.AdaptiveAvgPool1d(1)#全局平均池化
         t = int(abs((math.log(channel, 2) + b) / gamma))
         k = t if t % 2 else t + 1
         self.conv1 = nn.Conv1d(1, 1, kernel_size=k, padding=int(k / 2), bias=False)
-        self.fc = nn.Conv2d(channel, channel, 1, padding=0, bias=True)
+        self.fc = nn.Conv1d(channel, channel, 1, padding=0, bias=True)
         self.sigmoid = nn.Sigmoid()
         self.mix = Mix()
     def forward(self, input):
-        x = self.avg_pool(input)
-        x1 = self.conv1(x.squeeze(-1).transpose(-1, -2)).transpose(-1, -2)#(1,64,1)
-        x2 = self.fc(x).squeeze(-1).transpose(-1, -2)#(1,1,64)
-        out1 = torch.sum(torch.matmul(x1,x2),dim=1).unsqueeze(-1).unsqueeze(-1)#(1,64,1,1)
+        x = self.avg_pool(input)#输入bcl(1,6,1)
+        x1 = self.conv1(x.transpose(-1, -2)).transpose(-1, -2)#bcl
+        x2 = self.fc(x).transpose(-1, -2)#blc
+        out1 = torch.sum(torch.matmul(x1,x2),dim=1).unsqueeze(-1)
         out1 = self.sigmoid(out1)
-        out2 = torch.sum(torch.matmul(x2.transpose(-1, -2),x1.transpose(-1, -2)),dim=1).unsqueeze(-1).unsqueeze(-1)
+        out2 = torch.sum(torch.matmul(x2.transpose(-1, -2),x1.transpose(-1, -2)),dim=1).unsqueeze(-1)
         out2 = self.sigmoid(out2)
         out = self.mix(out1,out2)
-        out = self.conv1(out.squeeze(-1).transpose(-1, -2)).transpose(-1, -2).unsqueeze(-1)
+        out = self.conv1(out.transpose(-1, -2)).transpose(-1, -2)
         out = self.sigmoid(out)
         return input*out
-
 if __name__ == '__main__':
-    input = torch.rand(1,64,256,256)
-    A = FCA(channel=64)
-    #stat(A, input_size=[64, 1, 1])
-    y = A(input)
-    print(y.size())
+    test = FCA(6)# 实例化
+    input = torch.randn(1, 6, 200)# 创建一个随机输入张量，形状为[Batch, Input length, Channel]
+    output = test(input)# 执行前向传播
+    print("Input shape:", input.shape)
+    print("Output shape:", output.shape)
 
