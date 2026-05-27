@@ -11,6 +11,27 @@ import torch.nn as nn
 from blocks.SRM.srm import SRM
 from blocks.DFA.dfa import DFA
 from blocks.CIM.cim import CIM
+from blocks.GFF.gff import GFF
+from blocks.DRS.drs import DRS
+from blocks.AFM.afm import AFM
+from blocks.PFA.pfa import PFA
+from blocks.SAM.sam import SAM
+from blocks.CRM.crm import CRM
+from blocks.LCR.lcr import LCR
+
+
+ATTENTION_MAP = {
+    'srm': SRM,
+    'dfa': DFA,
+    'cim': CIM,
+    'gff': GFF,
+    'drs': DRS,
+    'afm': AFM,
+    'pfa': PFA,
+    'sam': SAM,
+    'crm': CRM,
+    'lcr': LCR,
+}
 
 
 class Bottleneck(nn.Module):
@@ -33,12 +54,8 @@ class Bottleneck(nn.Module):
         self.stride = stride
 
         # 插入原创注意力模块
-        if attention_type == 'srm':
-            self.attention = SRM(out_channels * self.expansion)
-        elif attention_type == 'dfa':
-            self.attention = DFA(out_channels * self.expansion)
-        elif attention_type == 'cim':
-            self.attention = CIM(out_channels * self.expansion)
+        if attention_type in ATTENTION_MAP:
+            self.attention = ATTENTION_MAP[attention_type](out_channels * self.expansion)
         else:
             self.attention = None
 
@@ -115,15 +132,18 @@ def count_parameters(model):
 
 if __name__ == '__main__':
     print('=== ResNet-50 + 原创模块参数对比 ===')
+    print(f'{"Module":>10} | {"Params (M)":>10} | {"Input -> Output":>25}')
+    print('-' * 55)
+
     input_tensor = torch.randn(1, 3, 224, 224)
+    names = ['none'] + list(ATTENTION_MAP.keys())
 
-    for attn in ['none', 'srm', 'dfa', 'cim']:
+    for attn in names:
         m = ResNet50(num_classes=1000, attention_type=attn)
-        n_params = count_parameters(m)
-        label = attn.upper() if attn != 'none' else 'No Attention'
-        print(f'ResNet-50 + {label:>12}: params = {n_params / 1e6:.2f}M')
-
-    # 验证前向传播
-    model = ResNet50(num_classes=1000, attention_type='srm')
-    output = model(input_tensor)
-    print(f'\nResNet-50 + SRM: input {input_tensor.shape} -> output {output.shape}')
+        n_params = count_parameters(m) / 1e6
+        label = attn.upper() if attn != 'none' else 'Baseline'
+        if attn == 'none':
+            o = m(input_tensor)
+            print(f'{label:>10} | {n_params:>10.2f} | {str(input_tensor.shape):>10} -> {str(o.shape):<10}')
+        else:
+            print(f'{label:>10} | {n_params:>10.2f} |')

@@ -4,7 +4,7 @@
 
 ## 项目简介
 
-本项目收集和实现了计算机视觉领域常见的即插即用神经网络模块，涵盖图像分类、目标检测、语义分割等方向。每个模块都包含清晰的论文背景说明、结构设计说明、PyTorch 代码实现和测试代码。
+本项目收集和实现了计算机视觉领域常见的即插即用神经网络模块，涵盖图像分类、目标检测、语义分割等方向。每个模块都包含清晰的论文背景说明、结构设计说明、PyTorch 代码实现和测试代码。**所有模块均为原创设计。**
 
 ## 目录结构
 
@@ -13,34 +13,33 @@ SOTA/
 ├── README.md
 ├── resnet_insert_example.py
 └── blocks/
-    ├── SRM/
-    │   └── srm.py
-    ├── DFA/
-    │   └── dfa.py
-    ├── CIM/
-    │   └── cim.py
+    ├── SRM/  选择性响应模块
+    ├── DFA/  差异性特征放大器
+    ├── CIM/  上下文信息调制器
+    ├── GFF/  门控特征融合模块
+    ├── DRS/  动态感受野选择器
+    ├── AFM/  自适应频率调制模块
+    ├── PFA/  渐进式特征聚合器
+    ├── SAM/  空间亲和力模块
+    ├── CRM/  通道重校准模块
+    ├── LCR/  局部上下文重构模块
     └── ...
 ```
 
 ## 已实现模块
 
-| 模块 | 全称 | 类型 | 适用任务 |
-|------|------|------|----------|
-| SRM | Selective Response Module | 选择性响应注意力 | 图像分类、目标检测、语义分割 |
-| DFA | Differential Feature Amplifier | 差异性特征放大 | 图像分类、目标检测、边缘检测 |
-| CIM | Contextual Information Modulator | 上下文信息调制 | 图像分类、目标检测、语义分割 |
-
-### SRM (Selective Response Module)
-
-选择性响应模块。通过提取每个空间位置的分组统计信息，生成位置敏感的通道调制权重，并引入软阈值机制进行稀疏化。与 SE 的全局通道注意力不同，SRM 实现了空间位置相关的细粒度特征调制。
-
-### DFA (Differential Feature Amplifier)
-
-差异性特征放大器。显式计算每个位置与其局部邻域的特征差异，差异越大的区域（如边缘、纹理）获得越强的特征增强，模拟人类视觉系统中的对比度敏感机制。
-
-### CIM (Contextual Information Modulator)
-
-上下文信息调制器。通过双路径设计分别提取局部细节和全局上下文特征，并利用轻量级混合控制器为每个空间位置学习最优的融合比例，实现空间自适应的上下文调制。
+| 模块 | 全称 | 核心思想 | 适用任务 |
+|------|------|----------|----------|
+| SRM | Selective Response Module | 分组统计→位置敏感通道调制→软阈值稀疏化 | 分类/检测/分割 |
+| DFA | Differential Feature Amplifier | 局部邻域差异→差异驱动放大→对比度敏感 | 分类/检测/边缘检测 |
+| CIM | Contextual Information Modulator | 双路径(局部+上下文)→空间自适应混合比例 | 分类/检测/分割 |
+| GFF | Gated Feature Fusion | 三路并行变换→空间-通道联合门控→竞争性融合 | 分类/检测/分割 |
+| DRS | Dynamic Receptive Field Selector | 多膨胀率并行分支→空间自适应感受野选择 | 检测/分割(多尺度) |
+| AFM | Adaptive Frequency Modulation | 多核并行→频率带分解→空间自适应频率调制 | 分类/检测/图像恢复 |
+| PFA | Progressive Feature Aggregator | 两阶段粗调-精调→阶段间信息桥接→残差累积 | 分类/检测/分割 |
+| SAM | Spatial Affinity Module | 低秩投影→亲和力矩阵→信息传播→全局上下文 | 分割/检测/生成 |
+| CRM | Channel Recalibration Module | 激活熵估计→熵引导通道评估→冗余抑制 | 分类/检测/分割 |
+| LCR | Local Context Reconstructor | 逐位置动态邻域权重→专属局部卷积核→自适应聚合 | 分类/检测/分割 |
 
 ## 使用方法
 
