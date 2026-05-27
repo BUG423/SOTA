@@ -1,20 +1,20 @@
 """
 ResNet 中插入即插即用模块的示例代码。
 
-本文件展示如何将 blocks/ 目录下的注意力模块嵌入到标准 ResNet-50 骨干网络中。
+本文件展示如何将 blocks/ 目录下的原创模块嵌入到标准 ResNet-50 骨干网络中。
 所有模块均遵循即插即用原则：将模块插入每个残差块的卷积之后、残差相加之前即可。
 """
 import typing as t
 import torch
 import torch.nn as nn
 
-from blocks.CBAM.cbam import CBAM
-from blocks.EMA.ema import EMA
-from blocks.SCSA.scsa import SCSA
+from blocks.SRM.srm import SRM
+from blocks.DFA.dfa import DFA
+from blocks.CIM.cim import CIM
 
 
 class Bottleneck(nn.Module):
-    """ResNet Bottleneck + 可选的注意力模块"""
+    """ResNet Bottleneck + 可选的原创注意力模块"""
 
     expansion = 4
 
@@ -32,13 +32,13 @@ class Bottleneck(nn.Module):
         self.downsample = downsample
         self.stride = stride
 
-        # 插入注意力模块
-        if attention_type == 'cbam':
-            self.attention = CBAM(out_channels * self.expansion)
-        elif attention_type == 'ema':
-            self.attention = EMA(out_channels * self.expansion)
-        elif attention_type == 'scsa':
-            self.attention = SCSA(out_channels * self.expansion)
+        # 插入原创注意力模块
+        if attention_type == 'srm':
+            self.attention = SRM(out_channels * self.expansion)
+        elif attention_type == 'dfa':
+            self.attention = DFA(out_channels * self.expansion)
+        elif attention_type == 'cim':
+            self.attention = CIM(out_channels * self.expansion)
         else:
             self.attention = None
 
@@ -60,7 +60,7 @@ class Bottleneck(nn.Module):
 
 
 class ResNet50(nn.Module):
-    """ResNet-50 主干网络，支持插入注意力模块"""
+    """ResNet-50 主干网络，支持插入原创注意力模块"""
 
     def __init__(self, num_classes: int = 1000, attention_type: str = 'none'):
         super().__init__()
@@ -114,19 +114,16 @@ def count_parameters(model):
 
 
 if __name__ == '__main__':
-    # 示例：创建带 CBAM 注意力的 ResNet-50
-    model = ResNet50(num_classes=1000, attention_type='cbam')
+    print('=== ResNet-50 + 原创模块参数对比 ===')
     input_tensor = torch.randn(1, 3, 224, 224)
-    output = model(input_tensor)
 
-    print('=== ResNet-50 + CBAM ===')
-    print('input_size:', input_tensor.size())
-    print('output_size:', output.size())
-    print('params:', count_parameters(model))
-
-    # 对比三种注意力模块
-    for attn in ['none', 'cbam', 'ema', 'scsa']:
+    for attn in ['none', 'srm', 'dfa', 'cim']:
         m = ResNet50(num_classes=1000, attention_type=attn)
         n_params = count_parameters(m)
-        print(f'ResNet-50 + {attn.upper() if attn != "none" else "No Attention"}: '
-              f'params = {n_params / 1e6:.2f}M')
+        label = attn.upper() if attn != 'none' else 'No Attention'
+        print(f'ResNet-50 + {label:>12}: params = {n_params / 1e6:.2f}M')
+
+    # 验证前向传播
+    model = ResNet50(num_classes=1000, attention_type='srm')
+    output = model(input_tensor)
+    print(f'\nResNet-50 + SRM: input {input_tensor.shape} -> output {output.shape}')
