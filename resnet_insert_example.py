@@ -18,6 +18,9 @@ from blocks.PFA.pfa import PFA
 from blocks.SAM.sam import SAM
 from blocks.CRM.crm import CRM
 from blocks.LCR.lcr import LCR
+from blocks.RIM.rim import RIM
+from blocks.PDR.pdr import PDR
+from blocks.SSM.ssm import SSM
 
 
 ATTENTION_MAP = {
@@ -31,6 +34,9 @@ ATTENTION_MAP = {
     'sam': SAM,
     'crm': CRM,
     'lcr': LCR,
+    'rim': RIM,
+    'pdr': PDR,
+    'ssm': SSM,
 }
 
 

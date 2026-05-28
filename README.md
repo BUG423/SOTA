@@ -23,35 +23,41 @@ SOTA/
     ├── SAM/  空间亲和力模块
     ├── CRM/  通道重校准模块
     ├── LCR/  局部上下文重构模块
+    ├── RIM/  递归推理模块
+    ├── PDR/  极化双表示模块
+    ├── SSM/  显著性引导抑制模块
     └── ...
 ```
 
 ## 已实现模块
 
-| 模块 | 全称 | 核心思想 | 适用任务 |
-|------|------|----------|----------|
-| SRM | Selective Response Module | 分组统计→位置敏感通道调制→软阈值稀疏化 | 分类/检测/分割 |
-| DFA | Differential Feature Amplifier | 局部邻域差异→差异驱动放大→对比度敏感 | 分类/检测/边缘检测 |
-| CIM | Contextual Information Modulator | 双路径(局部+上下文)→空间自适应混合比例 | 分类/检测/分割 |
-| GFF | Gated Feature Fusion | 三路并行变换→空间-通道联合门控→竞争性融合 | 分类/检测/分割 |
-| DRS | Dynamic Receptive Field Selector | 多膨胀率并行分支→空间自适应感受野选择 | 检测/分割(多尺度) |
-| AFM | Adaptive Frequency Modulation | 多核并行→频率带分解→空间自适应频率调制 | 分类/检测/图像恢复 |
-| PFA | Progressive Feature Aggregator | 两阶段粗调-精调→阶段间信息桥接→残差累积 | 分类/检测/分割 |
-| SAM | Spatial Affinity Module | 低秩投影→亲和力矩阵→信息传播→全局上下文 | 分割/检测/生成 |
-| CRM | Channel Recalibration Module | 激活熵估计→熵引导通道评估→冗余抑制 | 分类/检测/分割 |
-| LCR | Local Context Reconstructor | 逐位置动态邻域权重→专属局部卷积核→自适应聚合 | 分类/检测/分割 |
+| 日期 | 模块 | 全称 | 核心思想 | 适用任务 |
+|------|------|------|----------|----------|
+| 05-27 | SRM | Selective Response Module | 分组统计→位置敏感通道调制→软阈值稀疏化 | 分类/检测/分割 |
+| 05-27 | DFA | Differential Feature Amplifier | 局部邻域差异→差异驱动放大→对比度敏感 | 分类/检测/边缘检测 |
+| 05-27 | CIM | Contextual Information Modulator | 双路径(局部+上下文)→空间自适应混合比例 | 分类/检测/分割 |
+| 05-27 | GFF | Gated Feature Fusion | 三路并行变换→空间-通道联合门控→竞争性融合 | 分类/检测/分割 |
+| 05-27 | DRS | Dynamic Receptive Field Selector | 多膨胀率并行分支→空间自适应感受野选择 | 检测/分割(多尺度) |
+| 05-27 | AFM | Adaptive Frequency Modulation | 多核并行→频率带分解→空间自适应频率调制 | 分类/检测/图像恢复 |
+| 05-27 | PFA | Progressive Feature Aggregator | 两阶段粗调-精调→阶段间信息桥接→残差累积 | 分类/检测/分割 |
+| 05-27 | SAM | Spatial Affinity Module | 低秩投影→亲和力矩阵→信息传播→全局上下文 | 分割/检测/生成 |
+| 05-27 | CRM | Channel Recalibration Module | 激活熵估计→熵引导通道评估→冗余抑制 | 分类/检测/分割 |
+| 05-27 | LCR | Local Context Reconstructor | 逐位置动态邻域权重→专属局部卷积核→自适应聚合 | 分类/检测/分割 |
+| 05-28 | RIM | Recursive Inference Module | 权重共享递归变换→迭代嵌入→残差累积精炼 | 分类/检测/分割 |
+| 05-28 | PDR | Polarized Dual Representation | 空间/语义双通路→交叉门控→极化特征融合 | 分类/检测/分割 |
+| 05-28 | SSM | Saliency-Guided Suppression Module | 显著性检测→自适应阈值→软抑制→信息预算重分配 | 分类/检测/分割 |
 
 ## 使用方法
 
 每个模块均可作为即插即用组件嵌入现有网络：
 
 ```python
-from blocks.SRM.srm import SRM
+from blocks.RIM.rim import RIM
 import torch
 
-srm = SRM(channels=64)
+rim = RIM(channels=64, num_iterations=3)
 x = torch.randn(1, 64, 32, 32)
-out = srm(x)
+out = rim(x)
 print(out.shape)  # [1, 64, 32, 32]
 ```
 
