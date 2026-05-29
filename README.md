@@ -26,6 +26,9 @@ SOTA/
     ├── RIM/  递归推理模块
     ├── PDR/  极化双表示模块
     ├── SSM/  显著性引导抑制模块
+    ├── PGM/  渐进式门控模块
+    ├── FEM/  特征均衡模块
+    ├── IGM/  信息汇聚模块
     └── ...
 ```
 
@@ -46,6 +49,9 @@ SOTA/
 | 05-28 | RIM | Recursive Inference Module | 权重共享递归变换→迭代嵌入→残差累积精炼 | 分类/检测/分割 |
 | 05-28 | PDR | Polarized Dual Representation | 空间/语义双通路→交叉门控→极化特征融合 | 分类/检测/分割 |
 | 05-28 | SSM | Saliency-Guided Suppression Module | 显著性检测→自适应阈值→软抑制→信息预算重分配 | 分类/检测/分割 |
+| 05-29 | PGM | Progressive Gating Module | 三阶段级联门控(粗→中→细)→通道级自适应融合 | 分类/检测/分割 |
+| 05-29 | FEM | Feature Equilibrium Module | 通道统计编码→均衡能量学习→指数平滑调节 | 分类/检测/分割 |
+| 05-29 | IGM | Information Gathering Module | 多尺度深度可分离汇聚→空间自适应尺度权重 | 分类/检测/分割 |
 
 ## 使用方法
 

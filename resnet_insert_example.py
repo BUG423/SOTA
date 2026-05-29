@@ -21,6 +21,9 @@ from blocks.LCR.lcr import LCR
 from blocks.RIM.rim import RIM
 from blocks.PDR.pdr import PDR
 from blocks.SSM.ssm import SSM
+from blocks.PGM.pgm import PGM
+from blocks.FEM.fem import FEM
+from blocks.IGM.igm import IGM
 
 
 ATTENTION_MAP = {
@@ -37,6 +40,9 @@ ATTENTION_MAP = {
     'rim': RIM,
     'pdr': PDR,
     'ssm': SSM,
+    'pgm': PGM,
+    'fem': FEM,
+    'igm': IGM,
 }
 
 
