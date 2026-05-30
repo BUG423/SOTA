@@ -29,6 +29,9 @@ SOTA/
     ├── PGM/  渐进式门控模块
     ├── FEM/  特征均衡模块
     ├── IGM/  信息汇聚模块
+    ├── RGM/  互惠引导模块
+    ├── DSM/  双尺度调制器
+    ├── OEM/  序统计增强模块
     └── ...
 ```
 
@@ -52,6 +55,9 @@ SOTA/
 | 05-29 | PGM | Progressive Gating Module | 三阶段级联门控(粗→中→细)→通道级自适应融合 | 分类/检测/分割 |
 | 05-29 | FEM | Feature Equilibrium Module | 通道统计编码→均衡能量学习→指数平滑调节 | 分类/检测/分割 |
 | 05-29 | IGM | Information Gathering Module | 多尺度深度可分离汇聚→空间自适应尺度权重 | 分类/检测/分割 |
+| 05-30 | RGM | Reciprocal Guidance Module | 通道-空间双分支互惠引导→双向信息调制 | 分类/检测/分割 |
+| 05-30 | DSM | Dual-Scale Modulator | 粗-细双尺度互调→上下文引导+细节回注 | 分类/检测/分割 |
+| 05-30 | OEM | Order-Statistic Enhancement Module | 多序统计量提取→空间自适应统计选择→鲁棒增强 | 分类/检测/分割 |
 
 ## 使用方法
 
