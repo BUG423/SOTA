@@ -32,6 +32,9 @@ SOTA/
     ├── RGM/  互惠引导模块
     ├── DSM/  双尺度调制器
     ├── OEM/  序统计增强模块
+    ├── MPM/  动量传播模块
+    ├── PCM/  相位一致性模块
+    ├── CGM/  条件门控模块
     └── ...
 ```
 
@@ -58,6 +61,9 @@ SOTA/
 | 05-30 | RGM | Reciprocal Guidance Module | 通道-空间双分支互惠引导→双向信息调制 | 分类/检测/分割 |
 | 05-30 | DSM | Dual-Scale Modulator | 粗-细双尺度互调→上下文引导+细节回注 | 分类/检测/分割 |
 | 05-30 | OEM | Order-Statistic Enhancement Module | 多序统计量提取→空间自适应统计选择→鲁棒增强 | 分类/检测/分割 |
+| 05-31 | MPM | Momentum Propagation Module | 大核平滑动量参考→瞬态偏差感知→自适应调制 | 分类/检测/分割 |
+| 05-31 | PCM | Phase-Coherence Module | FFT频域解耦→幅度重标定+相位一致性增强 | 分类/检测/分割 |
+| 05-31 | CGM | Conditional Gating Module | 可学习条件原型→相似度驱动门控→语义参照增强 | 分类/检测/分割 |
 
 ## 使用方法
 

@@ -27,6 +27,9 @@ from blocks.IGM.igm import IGM
 from blocks.RGM.rgm import RGM
 from blocks.DSM.dsm import DSM
 from blocks.OEM.oem import OEM
+from blocks.MPM.mpm import MPM
+from blocks.PCM.pcm import PCM
+from blocks.CGM.cgm import CGM
 
 
 ATTENTION_MAP = {
@@ -49,6 +52,9 @@ ATTENTION_MAP = {
     'rgm': RGM,
     'dsm': DSM,
     'oem': OEM,
+    'mpm': MPM,
+    'pcm': PCM,
+    'cgm': CGM,
 }
 
 
