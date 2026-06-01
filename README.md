@@ -35,6 +35,9 @@ SOTA/
     ├── MPM/  动量传播模块
     ├── PCM/  相位一致性模块
     ├── CGM/  条件门控模块
+    ├── IRM/  信息路由模块
+    ├── BSM/  双边相似度模块
+    ├── DGM/  多样性引导模块
     └── ...
 ```
 
@@ -64,6 +67,9 @@ SOTA/
 | 05-31 | MPM | Momentum Propagation Module | 大核平滑动量参考→瞬态偏差感知→自适应调制 | 分类/检测/分割 |
 | 05-31 | PCM | Phase-Coherence Module | FFT频域解耦→幅度重标定+相位一致性增强 | 分类/检测/分割 |
 | 05-31 | CGM | Conditional Gating Module | 可学习条件原型→相似度驱动门控→语义参照增强 | 分类/检测/分割 |
+| 06-01 | IRM | Information Routing Module | 多专家内容感知路由→空间自适应专家混合 | 分类/检测/分割 |
+| 06-01 | BSM | Bilateral Similarity Module | K×K邻域内容相似度→双边自适应加权聚合 | 分类/检测/分割 |
+| 06-01 | DGM | Diversity-Guided Module | 通道Gram矩阵→冗余分数驱动调制→多样性增强 | 分类/检测/分割 |
 
 ## 使用方法
 
