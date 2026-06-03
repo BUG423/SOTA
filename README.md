@@ -38,6 +38,9 @@ SOTA/
     ├── IRM/  信息路由模块
     ├── BSM/  双边相似度模块
     ├── DGM/  多样性引导模块
+    ├── SUM/  空间不确定性模块
+    ├── AGM/  自适应粒度模块
+    ├── RAM/  残差放大模块
     └── ...
 ```
 
@@ -70,6 +73,9 @@ SOTA/
 | 06-01 | IRM | Information Routing Module | 多专家内容感知路由→空间自适应专家混合 | 分类/检测/分割 |
 | 06-01 | BSM | Bilateral Similarity Module | K×K邻域内容相似度→双边自适应加权聚合 | 分类/检测/分割 |
 | 06-01 | DGM | Diversity-Guided Module | 通道Gram矩阵→冗余分数驱动调制→多样性增强 | 分类/检测/分割 |
+| 06-03 | SUM | Spatial Uncertainty Module | 局部不确定性估计→不确定引导平滑/保持双路径融合 | 分类/检测/分割 |
+| 06-03 | AGM | Adaptive Granularity Module | 粒度偏好图→粗细双分支→空间自适应粒度插值 | 分类/检测/分割 |
+| 06-03 | RAM | Residual Amplification Module | 基座-残差分解→残差信息分析→内容感知放大/抑制 | 分类/检测/分割 |
 
 ## 使用方法
 

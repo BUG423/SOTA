@@ -33,6 +33,9 @@ from blocks.CGM.cgm import CGM
 from blocks.IRM.irm import IRM
 from blocks.BSM.bsm import BSM
 from blocks.DGM.dgm import DGM
+from blocks.SUM.sum import SUM
+from blocks.AGM.agm import AGM
+from blocks.RAM.ram import RAM
 
 
 ATTENTION_MAP = {
@@ -61,6 +64,9 @@ ATTENTION_MAP = {
     'irm': IRM,
     'bsm': BSM,
     'dgm': DGM,
+    'sum': SUM,
+    'agm': AGM,
+    'ram': RAM,
 }
 
 
