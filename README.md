@@ -1,105 +1,109 @@
 # SOTA - State-of-the-Art Neural Network Modules
 
-一个系统整理、复现和开发常用神经网络模块的开源仓库，重点面向计算机视觉任务。
+[![English](https://img.shields.io/badge/README-English-blue)](README.md)
+[![中文](https://img.shields.io/badge/README-中文-red)](README_CN.md)
 
-## 项目简介
+A systematically organized open-source repository of commonly used neural network modules, with a focus on computer vision tasks.
 
-本项目收集和实现了计算机视觉领域常见的即插即用神经网络模块，涵盖图像分类、目标检测、语义分割等方向。每个模块都包含清晰的论文背景说明、结构设计说明、PyTorch 代码实现和测试代码。**所有模块均为原创设计。**
+## Overview
 
-## 目录结构
+This project collects and implements popular plug-and-play neural network modules for computer vision, covering image classification, object detection, semantic segmentation, and more. Each module includes clear documentation on its paper background, architectural design, PyTorch implementation, and test code. **All modules are originally designed.**
+
+## Directory Structure
 
 ```
 SOTA/
 ├── README.md
+├── README_CN.md
 ├── resnet_insert_example.py
 └── blocks/
-    ├── SRM/  选择性响应模块
-    ├── DFA/  差异性特征放大器
-    ├── CIM/  上下文信息调制器
-    ├── GFF/  门控特征融合模块
-    ├── DRS/  动态感受野选择器
-    ├── AFM/  自适应频率调制模块
-    ├── PFA/  渐进式特征聚合器
-    ├── SAM/  空间亲和力模块
-    ├── CRM/  通道重校准模块
-    ├── LCR/  局部上下文重构模块
-    ├── RIM/  递归推理模块
-    ├── PDR/  极化双表示模块
-    ├── SSM/  显著性引导抑制模块
-    ├── PGM/  渐进式门控模块
-    ├── FEM/  特征均衡模块
-    ├── IGM/  信息汇聚模块
-    ├── RGM/  互惠引导模块
-    ├── DSM/  双尺度调制器
-    ├── OEM/  序统计增强模块
-    ├── MPM/  动量传播模块
-    ├── PCM/  相位一致性模块
-    ├── CGM/  条件门控模块
-    ├── IRM/  信息路由模块
-    ├── BSM/  双边相似度模块
-    ├── DGM/  多样性引导模块
-    ├── SUM/  空间不确定性模块
-    ├── AGM/  自适应粒度模块
-    ├── RAM/  残差放大模块
-    ├── TCM/  张量补全模块
-    ├── NLM/  非局部调制模块
-    ├── EDM/  熵驱动模块
-    ├── FIM/  频率重要性模块
-    ├── HTM/  层次变换模块
-    ├── WAM/  加权注意力模块
-    ├── RCM/  递归卷积模块
-    ├── CAM/  对比度感知模块
-    ├── SDM/  谱分解模块
-    ├── QEM/  分位数增强模块
+    ├── SRM/  Selective Response Module
+    ├── DFA/  Differential Feature Amplifier
+    ├── CIM/  Contextual Information Modulator
+    ├── GFF/  Gated Feature Fusion
+    ├── DRS/  Dynamic Receptive Field Selector
+    ├── AFM/  Adaptive Frequency Modulation
+    ├── PFA/  Progressive Feature Aggregator
+    ├── SAM/  Spatial Affinity Module
+    ├── CRM/  Channel Recalibration Module
+    ├── LCR/  Local Context Reconstructor
+    ├── RIM/  Recursive Inference Module
+    ├── PDR/  Polarized Dual Representation
+    ├── SSM/  Saliency-Guided Suppression Module
+    ├── PGM/  Progressive Gating Module
+    ├── FEM/  Feature Equilibrium Module
+    ├── IGM/  Information Gathering Module
+    ├── RGM/  Reciprocal Guidance Module
+    ├── DSM/  Dual-Scale Modulator
+    ├── OEM/  Order-Statistic Enhancement Module
+    ├── MPM/  Momentum Propagation Module
+    ├── PCM/  Phase-Coherence Module
+    ├── CGM/  Conditional Gating Module
+    ├── IRM/  Information Routing Module
+    ├── BSM/  Bilateral Similarity Module
+    ├── DGM/  Diversity-Guided Module
+    ├── SUM/  Spatial Uncertainty Module
+    ├── AGM/  Adaptive Granularity Module
+    ├── RAM/  Residual Amplification Module
+    ├── TCM/  Tensor Completion Module
+    ├── NLM/  Non-local Modulation Module
+    ├── EDM/  Entropy-Driven Module
+    ├── FIM/  Frequency Importance Module
+    ├── HTM/  Hierarchical Transformation Module
+    ├── WAM/  Weighted Attention Module
+    ├── RCM/  Recursive Convolution Module
+    ├── CAM/  Contrast-Aware Module
+    ├── SDM/  Spectral Decomposition Module
+    ├── QEM/  Quantile Enhancement Module
     └── ...
 ```
 
-## 已实现模块
+## Implemented Modules
 
-| 日期 | 模块 | 全称 | 核心思想 | 适用任务 |
-|------|------|------|----------|----------|
-| 05-27 | SRM | Selective Response Module | 分组统计→位置敏感通道调制→软阈值稀疏化 | 分类/检测/分割 |
-| 05-27 | DFA | Differential Feature Amplifier | 局部邻域差异→差异驱动放大→对比度敏感 | 分类/检测/边缘检测 |
-| 05-27 | CIM | Contextual Information Modulator | 双路径(局部+上下文)→空间自适应混合比例 | 分类/检测/分割 |
-| 05-27 | GFF | Gated Feature Fusion | 三路并行变换→空间-通道联合门控→竞争性融合 | 分类/检测/分割 |
-| 05-27 | DRS | Dynamic Receptive Field Selector | 多膨胀率并行分支→空间自适应感受野选择 | 检测/分割(多尺度) |
-| 05-27 | AFM | Adaptive Frequency Modulation | 多核并行→频率带分解→空间自适应频率调制 | 分类/检测/图像恢复 |
-| 05-27 | PFA | Progressive Feature Aggregator | 两阶段粗调-精调→阶段间信息桥接→残差累积 | 分类/检测/分割 |
-| 05-27 | SAM | Spatial Affinity Module | 低秩投影→亲和力矩阵→信息传播→全局上下文 | 分割/检测/生成 |
-| 05-27 | CRM | Channel Recalibration Module | 激活熵估计→熵引导通道评估→冗余抑制 | 分类/检测/分割 |
-| 05-27 | LCR | Local Context Reconstructor | 逐位置动态邻域权重→专属局部卷积核→自适应聚合 | 分类/检测/分割 |
-| 05-28 | RIM | Recursive Inference Module | 权重共享递归变换→迭代嵌入→残差累积精炼 | 分类/检测/分割 |
-| 05-28 | PDR | Polarized Dual Representation | 空间/语义双通路→交叉门控→极化特征融合 | 分类/检测/分割 |
-| 05-28 | SSM | Saliency-Guided Suppression Module | 显著性检测→自适应阈值→软抑制→信息预算重分配 | 分类/检测/分割 |
-| 05-29 | PGM | Progressive Gating Module | 三阶段级联门控(粗→中→细)→通道级自适应融合 | 分类/检测/分割 |
-| 05-29 | FEM | Feature Equilibrium Module | 通道统计编码→均衡能量学习→指数平滑调节 | 分类/检测/分割 |
-| 05-29 | IGM | Information Gathering Module | 多尺度深度可分离汇聚→空间自适应尺度权重 | 分类/检测/分割 |
-| 05-30 | RGM | Reciprocal Guidance Module | 通道-空间双分支互惠引导→双向信息调制 | 分类/检测/分割 |
-| 05-30 | DSM | Dual-Scale Modulator | 粗-细双尺度互调→上下文引导+细节回注 | 分类/检测/分割 |
-| 05-30 | OEM | Order-Statistic Enhancement Module | 多序统计量提取→空间自适应统计选择→鲁棒增强 | 分类/检测/分割 |
-| 05-31 | MPM | Momentum Propagation Module | 大核平滑动量参考→瞬态偏差感知→自适应调制 | 分类/检测/分割 |
-| 05-31 | PCM | Phase-Coherence Module | FFT频域解耦→幅度重标定+相位一致性增强 | 分类/检测/分割 |
-| 05-31 | CGM | Conditional Gating Module | 可学习条件原型→相似度驱动门控→语义参照增强 | 分类/检测/分割 |
-| 06-01 | IRM | Information Routing Module | 多专家内容感知路由→空间自适应专家混合 | 分类/检测/分割 |
-| 06-01 | BSM | Bilateral Similarity Module | K×K邻域内容相似度→双边自适应加权聚合 | 分类/检测/分割 |
-| 06-01 | DGM | Diversity-Guided Module | 通道Gram矩阵→冗余分数驱动调制→多样性增强 | 分类/检测/分割 |
-| 06-03 | SUM | Spatial Uncertainty Module | 局部不确定性估计→不确定引导平滑/保持双路径融合 | 分类/检测/分割 |
-| 06-03 | AGM | Adaptive Granularity Module | 粒度偏好图→粗细双分支→空间自适应粒度插值 | 分类/检测/分割 |
-| 06-03 | RAM | Residual Amplification Module | 基座-残差分解→残差信息分析→内容感知放大/抑制 | 分类/检测/分割 |
-| 06-06 | TCM | Tensor Completion Module | 张量低秩分解→信号子空间补全→结构保持融合 | 分类/检测/分割 |
-| 06-06 | NLM | Non-local Modulation Module | QKV投影→非局部亲和力→调制信号生成→残差调制 | 分类/检测/分割 |
-| 06-06 | EDM | Entropy-Driven Module | 局部信息熵估计→熵引导增强/压缩→自适应资源分配 | 分类/检测/分割 |
-| 06-06 | FIM | Frequency Importance Module | DCT频域分解→频率重要性学习→频谱重标定→IDCT | 分类/检测/分割 |
-| 06-06 | HTM | Hierarchical Transformation Module | 三阶段递进变换→信息桥接→自适应阶段融合 | 分类/检测/分割 |
-| 06-06 | WAM | Weighted Attention Module | 四模式注意力并行→模式融合权重学习→自适应组合 | 分类/检测/分割 |
-| 06-06 | RCM | Recursive Convolution Module | 权重共享递归卷积→终止门→空间自适应处理深度 | 分类/检测/分割 |
-| 06-06 | CAM | Contrast-Aware Module | 局部对比度估计→锐化/平滑双路径→对比度引导融合 | 分类/检测/分割 |
-| 06-06 | SDM | Spectral Decomposition Module | 通道协方差谱分解→子空间分离→谱域自适应滤波 | 分类/检测/分割 |
-| 06-06 | QEM | Quantile Enhancement Module | 分位数估计→鲁棒分位数归一化→分布感知增强 | 分类/检测/分割 |
+| Date | Module | Full Name | Core Idea | Applications |
+|------|--------|-----------|-----------|-------------|
+| 05-27 | SRM | Selective Response Module | Group-wise statistics → position-sensitive channel modulation → soft-threshold sparsification | Classification/Detection/Segmentation |
+| 05-27 | DFA | Differential Feature Amplifier | Local neighborhood differences → difference-driven amplification → contrast sensitivity | Classification/Detection/Edge Detection |
+| 05-27 | CIM | Contextual Information Modulator | Dual-path (local + context) → spatially-adaptive mixing ratio | Classification/Detection/Segmentation |
+| 05-27 | GFF | Gated Feature Fusion | Three parallel transformations → joint spatial-channel gating → competitive fusion | Classification/Detection/Segmentation |
+| 05-27 | DRS | Dynamic Receptive Field Selector | Multi-dilation parallel branches → spatially-adaptive receptive field selection | Detection/Segmentation (multi-scale) |
+| 05-27 | AFM | Adaptive Frequency Modulation | Multi-kernel parallel → frequency band decomposition → spatially-adaptive frequency modulation | Classification/Detection/Image Restoration |
+| 05-27 | PFA | Progressive Feature Aggregator | Two-stage coarse-fine tuning → inter-stage information bridge → residual accumulation | Classification/Detection/Segmentation |
+| 05-27 | SAM | Spatial Affinity Module | Low-rank projection → affinity matrix → information propagation → global context | Segmentation/Detection/Generation |
+| 05-27 | CRM | Channel Recalibration Module | Activation entropy estimation → entropy-guided channel evaluation → redundancy suppression | Classification/Detection/Segmentation |
+| 05-27 | LCR | Local Context Reconstructor | Per-position dynamic neighborhood weights → dedicated local convolution kernel → adaptive aggregation | Classification/Detection/Segmentation |
+| 05-28 | RIM | Recursive Inference Module | Weight-shared recursive transformation → iterative embedding → residual accumulation refinement | Classification/Detection/Segmentation |
+| 05-28 | PDR | Polarized Dual Representation | Spatial/semantic dual pathways → cross gating → polarized feature fusion | Classification/Detection/Segmentation |
+| 05-28 | SSM | Saliency-Guided Suppression Module | Saliency detection → adaptive threshold → soft suppression → information budget reallocation | Classification/Detection/Segmentation |
+| 05-29 | PGM | Progressive Gating Module | Three-stage cascaded gating (coarse→medium→fine) → channel-wise adaptive fusion | Classification/Detection/Segmentation |
+| 05-29 | FEM | Feature Equilibrium Module | Channel statistics encoding → equilibrium energy learning → exponential smoothing adjustment | Classification/Detection/Segmentation |
+| 05-29 | IGM | Information Gathering Module | Multi-scale depthwise separable gathering → spatially-adaptive scale weights | Classification/Detection/Segmentation |
+| 05-30 | RGM | Reciprocal Guidance Module | Channel-spatial dual-branch reciprocal guidance → bidirectional information modulation | Classification/Detection/Segmentation |
+| 05-30 | DSM | Dual-Scale Modulator | Coarse-fine dual-scale mutual modulation → context guidance + detail reinjection | Classification/Detection/Segmentation |
+| 05-30 | OEM | Order-Statistic Enhancement Module | Multi-order statistic extraction → spatially-adaptive statistic selection → robust enhancement | Classification/Detection/Segmentation |
+| 05-31 | MPM | Momentum Propagation Module | Large-kernel smoothed momentum reference → transient deviation awareness → adaptive modulation | Classification/Detection/Segmentation |
+| 05-31 | PCM | Phase-Coherence Module | FFT frequency domain decoupling → amplitude recalibration + phase coherence enhancement | Classification/Detection/Segmentation |
+| 05-31 | CGM | Conditional Gating Module | Learnable conditional prototypes → similarity-driven gating → semantic reference enhancement | Classification/Detection/Segmentation |
+| 06-01 | IRM | Information Routing Module | Multi-expert content-aware routing → spatially-adaptive mixture of experts | Classification/Detection/Segmentation |
+| 06-01 | BSM | Bilateral Similarity Module | K×K neighborhood content similarity → bilateral adaptive weighted aggregation | Classification/Detection/Segmentation |
+| 06-01 | DGM | Diversity-Guided Module | Channel Gram matrix → redundancy score-driven modulation → diversity enhancement | Classification/Detection/Segmentation |
+| 06-03 | SUM | Spatial Uncertainty Module | Local uncertainty estimation → uncertainty-guided smoothing/preservation dual-path fusion | Classification/Detection/Segmentation |
+| 06-03 | AGM | Adaptive Granularity Module | Granularity preference map → coarse-fine dual branch → spatially-adaptive granularity interpolation | Classification/Detection/Segmentation |
+| 06-03 | RAM | Residual Amplification Module | Base-residual decomposition → residual information analysis → content-aware amplification/suppression | Classification/Detection/Segmentation |
+| 06-06 | TCM | Tensor Completion Module | Low-rank tensor decomposition → signal subspace completion → structure-preserving fusion | Classification/Detection/Segmentation |
+| 06-06 | NLM | Non-local Modulation Module | QKV projection → non-local affinity → modulation signal generation → residual modulation | Classification/Detection/Segmentation |
+| 06-06 | EDM | Entropy-Driven Module | Local information entropy estimation → entropy-guided enhancement/compression → adaptive resource allocation | Classification/Detection/Segmentation |
+| 06-06 | FIM | Frequency Importance Module | DCT frequency domain decomposition → frequency importance learning → spectral recalibration → IDCT | Classification/Detection/Segmentation |
+| 06-06 | HTM | Hierarchical Transformation Module | Three-stage progressive transformation → information bridging → adaptive stage fusion | Classification/Detection/Segmentation |
+| 06-06 | WAM | Weighted Attention Module | Four-mode parallel attention → mode fusion weight learning → adaptive combination | Classification/Detection/Segmentation |
+| 06-06 | RCM | Recursive Convolution Module | Weight-shared recursive convolution → termination gate → spatially-adaptive processing depth | Classification/Detection/Segmentation |
+| 06-06 | CAM | Contrast-Aware Module | Local contrast estimation → sharpening/smoothing dual path → contrast-guided fusion | Classification/Detection/Segmentation |
+| 06-06 | SDM | Spectral Decomposition Module | Channel covariance spectral decomposition → subspace separation → spectral-domain adaptive filtering | Classification/Detection/Segmentation |
+| 06-06 | QEM | Quantile Enhancement Module | Quantile estimation → robust quantile normalization → distribution-aware enhancement | Classification/Detection/Segmentation |
 
-## 使用方法
+## Usage
 
-每个模块均可作为即插即用组件嵌入现有网络：
+Each module can be used as a plug-and-play component embedded into existing networks:
 
 ```python
 from blocks.RIM.rim import RIM
@@ -111,16 +115,16 @@ out = rim(x)
 print(out.shape)  # [1, 64, 32, 32]
 ```
 
-## 环境依赖
+## Requirements
 
 - Python >= 3.8
 - PyTorch >= 1.10
-- thop（可选，用于 FLOPs 统计）
+- thop (optional, for FLOPs statistics)
 
-## 贡献指南
+## Contributing
 
-欢迎提交 PR 添加新的神经网络模块。请参考 `blocks/` 下已有模块的格式，确保包含完整的文档说明和测试代码。
+Pull requests for new neural network modules are welcome. Please refer to the format of existing modules under `blocks/` and ensure complete documentation and test code are included.
 
-## 许可证
+## License
 
 MIT License
