@@ -41,6 +41,16 @@ SOTA/
     ├── SUM/  空间不确定性模块
     ├── AGM/  自适应粒度模块
     ├── RAM/  残差放大模块
+    ├── TCM/  张量补全模块
+    ├── NLM/  非局部调制模块
+    ├── EDM/  熵驱动模块
+    ├── FIM/  频率重要性模块
+    ├── HTM/  层次变换模块
+    ├── WAM/  加权注意力模块
+    ├── RCM/  递归卷积模块
+    ├── CAM/  对比度感知模块
+    ├── SDM/  谱分解模块
+    ├── QEM/  分位数增强模块
     └── ...
 ```
 
@@ -76,6 +86,16 @@ SOTA/
 | 06-03 | SUM | Spatial Uncertainty Module | 局部不确定性估计→不确定引导平滑/保持双路径融合 | 分类/检测/分割 |
 | 06-03 | AGM | Adaptive Granularity Module | 粒度偏好图→粗细双分支→空间自适应粒度插值 | 分类/检测/分割 |
 | 06-03 | RAM | Residual Amplification Module | 基座-残差分解→残差信息分析→内容感知放大/抑制 | 分类/检测/分割 |
+| 06-06 | TCM | Tensor Completion Module | 张量低秩分解→信号子空间补全→结构保持融合 | 分类/检测/分割 |
+| 06-06 | NLM | Non-local Modulation Module | QKV投影→非局部亲和力→调制信号生成→残差调制 | 分类/检测/分割 |
+| 06-06 | EDM | Entropy-Driven Module | 局部信息熵估计→熵引导增强/压缩→自适应资源分配 | 分类/检测/分割 |
+| 06-06 | FIM | Frequency Importance Module | DCT频域分解→频率重要性学习→频谱重标定→IDCT | 分类/检测/分割 |
+| 06-06 | HTM | Hierarchical Transformation Module | 三阶段递进变换→信息桥接→自适应阶段融合 | 分类/检测/分割 |
+| 06-06 | WAM | Weighted Attention Module | 四模式注意力并行→模式融合权重学习→自适应组合 | 分类/检测/分割 |
+| 06-06 | RCM | Recursive Convolution Module | 权重共享递归卷积→终止门→空间自适应处理深度 | 分类/检测/分割 |
+| 06-06 | CAM | Contrast-Aware Module | 局部对比度估计→锐化/平滑双路径→对比度引导融合 | 分类/检测/分割 |
+| 06-06 | SDM | Spectral Decomposition Module | 通道协方差谱分解→子空间分离→谱域自适应滤波 | 分类/检测/分割 |
+| 06-06 | QEM | Quantile Enhancement Module | 分位数估计→鲁棒分位数归一化→分布感知增强 | 分类/检测/分割 |
 
 ## 使用方法
 

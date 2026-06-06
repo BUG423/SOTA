@@ -36,6 +36,16 @@ from blocks.DGM.dgm import DGM
 from blocks.SUM.sum import SUM
 from blocks.AGM.agm import AGM
 from blocks.RAM.ram import RAM
+from blocks.TCM.tcm import TCM
+from blocks.NLM.nlm import NLM
+from blocks.EDM.edm import EDM
+from blocks.FIM.fim import FIM
+from blocks.HTM.htm import HTM
+from blocks.WAM.wam import WAM
+from blocks.RCM.rcm import RCM
+from blocks.CAM.cam import CAM
+from blocks.SDM.sdm import SDM
+from blocks.QEM.qem import QEM
 
 
 ATTENTION_MAP = {
@@ -67,6 +77,16 @@ ATTENTION_MAP = {
     'sum': SUM,
     'agm': AGM,
     'ram': RAM,
+    'tcm': TCM,
+    'nlm': NLM,
+    'edm': EDM,
+    'fim': FIM,
+    'htm': HTM,
+    'wam': WAM,
+    'rcm': RCM,
+    'cam': CAM,
+    'sdm': SDM,
+    'qem': QEM,
 }
 
 
